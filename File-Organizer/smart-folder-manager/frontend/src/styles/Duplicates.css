@@ -1,0 +1,104 @@
+/* Duplicates Page - Modern Design */
+.duplicates-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.duplicates-header {
+  margin-bottom: 2rem;
+}
+
+.duplicates-header h1 {
+  font-size: 2.5rem;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.duplicates-header p {
+  color: var(--gray-600);
+  font-size: 1.1rem;
+}
+
+.duplicate-group {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--danger-light);
+  margin-bottom: 1.5rem;
+  transition: all var(--transition);
+}
+
+.duplicate-group:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.group-header {
+  background: linear-gradient(135deg, var(--danger-light) 0%, white 100%);
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--gray-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.group-count {
+  background: var(--danger);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.group-files {
+  padding: 1.5rem;
+}
+
+.file-row {
+  padding: 1rem;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.file-row:last-child {
+  margin-bottom: 0;
+}
+
+.file-info {
+  flex: 1;
+}
+
+.file-name {
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 0.25rem;
+}
+
+.file-size {
+  color: var(--gray-500);
+  font-size: 0.85rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--gray-500);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}

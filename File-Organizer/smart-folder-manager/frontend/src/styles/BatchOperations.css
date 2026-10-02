@@ -1,0 +1,203 @@
+/* Batch Operations Page */
+.batch-operations-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.batch-content {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  border: 1px solid var(--gray-200);
+}
+
+.operations-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.path-input,
+.operation-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  background: white;
+}
+
+.path-input:focus,
+.operation-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.path-input:disabled,
+.operation-select:disabled {
+  background: var(--gray-100);
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  grid-column: 1 / -1;
+}
+
+.button-group .btn-secondary,
+.button-group .btn-primary {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.file-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.file-stats .stat-card {
+  background: linear-gradient(135deg, var(--success-light) 0%, var(--info-light) 100%);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--success);
+  text-align: center;
+}
+
+.file-stats .stat-label {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.file-stats .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.file-stats .stat-value-time {
+  font-size: 0.8rem;
+  color: var(--gray-700);
+}
+
+.results-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--info-light) 100%);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-lg);
+}
+
+.operation-summary {
+  margin-bottom: 2rem;
+}
+
+.operation-summary h3 {
+  color: var(--gray-900);
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.summary-card {
+  background: white;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-300);
+  text-align: center;
+}
+
+.summary-card.success {
+  background: linear-gradient(135deg, var(--success-light) 0%, white 100%);
+  border-color: var(--success);
+}
+
+.summary-card .label {
+  display: block;
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.summary-card .value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.summary-card.success .value {
+  color: var(--success);
+}
+
+.operation-details {
+  margin-top: 1.5rem;
+}
+
+.operation-details h4 {
+  color: var(--gray-900);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.details-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.detail-item {
+  background: white;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  color: var(--gray-900);
+  font-size: 0.9rem;
+}
+
+.error-message {
+  background: linear-gradient(135deg, var(--danger-light) 0%, #fca5a5 100%);
+  color: var(--gray-900);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--danger);
+  margin-top: 1rem;
+}
+
+.error-message strong {
+  color: var(--danger);
+}

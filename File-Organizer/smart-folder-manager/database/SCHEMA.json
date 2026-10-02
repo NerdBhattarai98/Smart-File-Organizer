@@ -1,0 +1,188 @@
+{
+  "database_schema": {
+    "description": "MongoDB Schema for Smart Folder Manager",
+    "version": "1.0.0",
+    "collections": {
+      "files_metadata": {
+        "description": "Store file metadata extracted during scanning",
+        "fields": {
+          "_id": "ObjectId (auto)",
+          "filename": "String (required)",
+          "filepath": "String (required, unique)",
+          "extension": "String",
+          "size": "Number (bytes)",
+          "hash": "String (SHA256)",
+          "modified_time": "Number (timestamp)",
+          "created_at": "Date (auto)",
+          "updated_at": "Date (auto)"
+        },
+        "indexes": [
+          "hash (unique)",
+          "filepath (unique)",
+          "extension",
+          "created_at"
+        ]
+      },
+      "classification_results": {
+        "description": "Store classification results for files",
+        "fields": {
+          "_id": "ObjectId (auto)",
+          "file_id": "ObjectId (reference to files_metadata)",
+          "filename": "String",
+          "predicted_category": "String",
+          "confidence": "Number (0-1)",
+          "method": "String (rule_based|ml_based)",
+          "processing_time_ms": "Number",
+          "timestamp": "Date"
+        },
+        "indexes": [
+          "file_id",
+          "predicted_category",
+          "confidence",
+          "timestamp"
+        ]
+      },
+      "duplicate_groups": {
+        "description": "Groups of identical or similar files",
+        "fields": {
+          "_id": "ObjectId (auto)",
+          "group_id": "String (unique)",
+          "files": [
+            {
+              "filename": "String",
+              "filepath": "String",
+              "file_id": "ObjectId"
+            }
+          ],
+          "similarity_score": "Number (0-1)",
+          "duplicate_type": "String (exact|similar)",
+          "common_hash": "String (for exact duplicates)",
+          "created_at": "Date"
+        },
+        "indexes": [
+          "group_id (unique)",
+          "duplicate_type",
+          "similarity_score"
+        ]
+      },
+      "action_logs": {
+        "description": "Log all user actions for audit trail",
+        "fields": {
+          "_id": "ObjectId (auto)",
+          "action_id": "String (unique, UUID)",
+          "action_type": "String (move|skip|delete|rename)",
+          "filename": "String",
+          "from_path": "String",
+          "to_path": "String",
+          "category": "String (target category)",
+          "confidence": "Number (classification confidence)",
+          "status": "String (success|failed|pending)",
+          "error_message": "String (if failed)",
+          "user_id": "String (optional, for multi-user)",
+          "timestamp": "Date",
+          "processing_time_ms": "Number"
+        },
+        "indexes": [
+          "action_id (unique)",
+          "timestamp",
+          "status",
+          "user_id",
+          "action_type"
+        ]
+      },
+      "undo_history": {
+        "description": "Track undoable actions",
+        "fields": {
+          "_id": "ObjectId (auto)",
+          "action_id": "String (reference to action_logs)",
+          "original_state": {
+            "path": "String",
+            "category": "String",
+            "modified_time": "Number"
+          },
+          "reversed_state": {
+            "path": "String",
+            "category": "String",
+            "modified_time": "Number"
+          },
+          "is_undone": "Boolean",
+          "undo_timestamp": "Date",
+          "created_at": "Date"
+        },
+        "indexes": [
+          "action_id",
+          "is_undone",
+          "created_at"
+        ]
+      },
+      "category_rules": {
+        "description": "Store custom category rules (future feature)",
+        "fields": {
+          "_id": "ObjectId (auto)",
+          "rule_name": "String",
+          "rule_type": "String (extension|keyword|regex)",
+          "pattern": "String",
+          "target_category": "String",
+          "priority": "Number",
+          "is_active": "Boolean",
+          "created_by": "String",
+          "created_at": "Date"
+        },
+        "indexes": [
+          "rule_name",
+          "target_category",
+          "is_active"
+        ]
+      },
+      "user_preferences": {
+        "description": "Store user settings and preferences",
+        "fields": {
+          "_id": "ObjectId (auto)",
+          "user_id": "String (unique)",
+          "confidence_threshold": "Number (0-1)",
+          "similarity_threshold": "Number (0-1)",
+          "auto_move_enabled": "Boolean",
+          "default_folder_path": "String",
+          "recent_folders": ["String"],
+          "last_scan": "Date",
+          "theme": "String (light|dark)",
+          "updated_at": "Date"
+        },
+        "indexes": [
+          "user_id (unique)"
+        ]
+      }
+    },
+    "indexes_explanation": {
+      "unique_indexes": "Ensure data integrity and prevent duplicates",
+      "regular_indexes": "Improve query performance",
+      "compound_indexes": "Support complex queries efficiently"
+    },
+    "migration_strategy": {
+      "v1_to_v2": "Add new fields with defaults, preserve existing data",
+      "backup": "Always backup before schema changes"
+    }
+  },
+  "json_file_storage": {
+    "description": "Alternative to MongoDB - using JSON files for simplicity",
+    "location": "app/logs/action_history.json",
+    "structure": {
+      "action": {
+        "id": "UUID",
+        "type": "move|skip",
+        "filename": "String",
+        "from_path": "String",
+        "to_path": "String",
+        "category": "String",
+        "confidence": "Number",
+        "timestamp": "ISO8601 datetime"
+      }
+    },
+    "limitations": [
+      "Single file - not scalable",
+      "No built-in indexing",
+      "No concurrency control",
+      "Suitable for project-II demo"
+    ]
+  }
+}
